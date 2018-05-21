@@ -1,6 +1,4 @@
 /.idea
 /.vscode
-/vendor
 *.log
-thinkphp
 .env

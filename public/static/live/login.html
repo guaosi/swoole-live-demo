@@ -95,12 +95,12 @@
 		  $('#authCodeBtn').click(function (event) {
 
 			    var phone_num = $(" input[ name='phone_num' ] ").val()
-				url = "http://singwa.swoole.com:8811?s=index/login&phone_num="+phone_num;
+				url = "http://swoole.com/index.php?s=index/send/index&phone_num="+phone_num;
 				$(this).html('已发送').attr('disabled', true);
 				// $.post()
 				$.get(url, function (data) {
 					// TODO: 将下面3行代码删除
-					if (data.status == 'ok') {
+					if (data.status == 1) {
 						alert('发送完成');
 					}
 					// if (result.status != 'ok') {

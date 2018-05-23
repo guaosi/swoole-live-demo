@@ -927,9 +927,9 @@ class Request
      */
     public function get($name = '', $default = null, $filter = '')
     {
-        if (empty($this->get)) {
+//        if (empty($this->get)) {
             $this->get = $_GET;
-        }
+//        }
 
         if (is_array($name)) {
             $this->param      = [];
@@ -949,14 +949,14 @@ class Request
      */
     public function post($name = '', $default = null, $filter = '')
     {
-        if (empty($this->post)) {
+//        if (empty($this->post)) {
             $content = $this->input;
             if (empty($_POST) && false !== strpos($this->contentType(), 'application/json')) {
                 $this->post = (array) json_decode($content, true);
             } else {
                 $this->post = $_POST;
             }
-        }
+//        }
 
         if (is_array($name)) {
             $this->param       = [];

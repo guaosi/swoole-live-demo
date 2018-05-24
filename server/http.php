@@ -46,12 +46,13 @@ $http->on('request', function ($request, $response) use ($http) {
     try {
         //直接执行框架(执行容器)
         think\Container::get('app')->run()->send();
+
     } catch (\Exception $exception) {
         //TODO
     }
     $res = ob_get_contents();
     ob_end_clean();
-
+//    $response->end('开始');
     //输出内容
    $response->end($res);
 });

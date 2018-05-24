@@ -6,10 +6,9 @@ use think\Request;
 
 class Index
 {
-    public function index(Request $request)
+    public function index()
     {
-
-        return 'ok';
+        return;
     }
 
     public function hello($name = 'ThinkPHP5')

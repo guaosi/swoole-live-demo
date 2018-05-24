@@ -8,5 +8,6 @@
 return [
     'host'=>'127.0.0.1',
     'port'=>6379,
+    'time_out'=>5,
     'sms_out_time'=>2*60
 ];

@@ -95,7 +95,7 @@
 		  $('#authCodeBtn').click(function (event) {
 
 			    var phone_num = $(" input[ name='phone_num' ] ").val()
-				url = "http://swoole.com/index.php?s=index/send/index&phone_num="+phone_num;
+				url = "http://swoole.com/index/send/index?phone_num="+phone_num;
 				$(this).html('已发送').attr('disabled', true);
 				// $.post()
 				$.get(url, function (data) {
@@ -106,7 +106,7 @@
 					// if (result.status != 'ok') {
 					// 	alert('网络错误');
 					// }
-				});
+				},'json');
 			});
 
 			// 提交表单
@@ -114,10 +114,12 @@
 				event.preventDefault();
 				var formData = $('form').serialize();
 				// TODO: 请求后台接口跳转界面，前端跳转或者后台跳
-				$.get("https://www.easy-mock.com/mock/5ab1188bddac7967e4398146/example/query?"+formData, function (data) {
-					console.log("https://www.easy-mock.com/mock/5ab1188bddac7967e4398146/example/query?" + formData);
-					// location.href='index.html';
-				});
+				$.get("http://swoole.com/index/login/index?"+formData, function (data) {
+                       if (data.status==1){
+                           //登陆成功
+						   location.href='http://swoole.com/index.html';
+					   }
+				},'json');
 			});
 
 			// 返回上一页

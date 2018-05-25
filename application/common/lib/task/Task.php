@@ -17,7 +17,7 @@ class Task{
      * @param $data['phone'] 手机号 $data['code'] 验证码
      * @return bool
      */
-     public static function sendSms($data){
+     public function sendSms($data,$serv){
 
          try{
              $respose=Sms::sendSms($data['phone'],$data['code']);
@@ -30,5 +30,11 @@ class Task{
              return false;
          }
          return true;
+     }
+     public function pushLive($data,$serv){
+         $users=Predis::getInstance()->sMembers(config('redis.live_user'));
+         foreach ($users as $fd){
+             $serv->push($fd,json_encode($data));
+         }
      }
 }

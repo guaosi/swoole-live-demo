@@ -1128,9 +1128,9 @@ class Request
      */
     public function file($name = '')
     {
-        if (empty($this->file)) {
+//        if (empty($this->file)) {
             $this->file = isset($_FILES) ? $_FILES : [];
-        }
+//        }
 
         if (is_array($name)) {
             return $this->file = array_merge($this->file, $name);

@@ -17,6 +17,9 @@ class Ws{
     ];
     public function __construct()
     {
+        $redis=new Redis();
+        $redis->connect('127.0.0.1',6379);
+        $redis->del('live_user');
         $this->ws=new swoole_websocket_server(Ws::HOST,Ws::PORT);
         $this->ws->set(Ws::CONFIG);
         $this->ws->on('workerstart',[$this,'onWorkerStart']);
@@ -78,18 +81,22 @@ class Ws{
         $response->end($res);
     }
     public function onClose($ser, $fd){
-        echo "client {$fd} closed\n";
+        $redis=\app\common\lib\redis\Predis::getInstance();
+        $redis->sRem(config('redis.live_user'),$fd);
+//        echo "client {$fd} closed\n";
     }
     public function onTask($serv,$task_id,$src_worker_id,$data){
         //将任务自动识别方法
         $taskobj=new app\common\lib\task\Task();
         $method=$data['method'];
-        $taskobj->$method($data['data']);
+        $taskobj->$method($data['data'],$serv);
     }
     public function onFinish($serv,$task_id,$data){
         print_r($data);
     }
     public function onOpen(swoole_websocket_server $server, $request){
+        $redis=\app\common\lib\redis\Predis::getInstance();
+        $redis->sAdd(config('redis.live_user'),$request->fd);
     }
     public function onMessage(swoole_websocket_server $server, $frame){
     }

@@ -22,4 +22,9 @@ class Index
     public function testpost(Request $request){
         return $request->post('m',0,'intval');
     }
+    public function test(){
+        $a=0;
+        var_dump(empty($a));
+        var_dump(isset($a));
+    }
 }

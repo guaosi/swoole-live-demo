@@ -94,10 +94,12 @@
           event.preventDefault();
           var formData = $('form').serialize();
           // TODO: 请求后台接口跳转界面，前端跳转或者后台跳
-          $.get("http://singwa.swoole.com:8811?s=admin/live/push&" + formData, function (data) {
+          $.get("http://swoole.com/admin/live/push?" + formData, function (data) {
 
             if (data.status == 1) {
               // 登录成功
+                alert('发送成功');
+                location.reload();
             }
             // location.href='index.html';
           }, 'json');

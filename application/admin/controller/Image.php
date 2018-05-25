@@ -12,14 +12,17 @@ use think\Request;
 class Image{
     public function index(Request $request){
         $file=$request->file('file');
-        $info=$file->move('../public/static/uploads');
-        if ($info){
-            $data=[
-                'image'=>config('host.host').config('host.dir').$info->getSaveName()
-            ];
-            return Util::show(config('code.success'),'OK',$data);
-        }else{
-            return Util::show(config('code.error'),'error');
+        if ($file){
+            $info=$file->move('../public/static/uploads');
+            if ($info){
+                $data=[
+                    'image'=>config('host.host').config('host.dir').$info->getSaveName()
+                ];
+                return Util::show(config('code.success'),'OK',$data);
+            }else{
+                return Util::show(config('code.error'),'error');
+            }
+
         }
 
     }

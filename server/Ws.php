@@ -8,6 +8,7 @@
 class Ws{
     const HOST="0.0.0.0";
     const PORT=9501;
+    const WS_PORT=9502;
     public $ws=null;
     const CONFIG=[
         'document_root' => '/mnt/hgfs/yaf/swoole.com/tp5/public/static',
@@ -22,6 +23,7 @@ class Ws{
         $redis->del('live_user');
         $this->ws=new swoole_websocket_server(Ws::HOST,Ws::PORT);
         $this->ws->set(Ws::CONFIG);
+        $this->ws->listen('0.0.0.0', Ws::WS_PORT, SWOOLE_SOCK_TCP);
         $this->ws->on('workerstart',[$this,'onWorkerStart']);
         $this->ws->on('request',[$this,'onRequest']);
         $this->ws->on('open',[$this,'onOpen']);

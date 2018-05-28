@@ -14,4 +14,11 @@ class Util{
             'data'=>$data
         ];
     }
+    public static function create_password($pw_length = 4){
+        $randpwd = '';
+        for ($i = 0; $i < $pw_length; $i++){
+            $randpwd .= chr(mt_rand(33, 126));
+        }
+        return $randpwd;
+    }
 }

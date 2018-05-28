@@ -37,4 +37,9 @@ class Task{
              $serv->push($fd,json_encode($data));
          }
      }
+     public function pushMessage($data,$serv){
+         foreach ($serv->ports[1]->connections as $fd){
+             $serv->push($fd, json_encode($data));
+         }
+     }
 }

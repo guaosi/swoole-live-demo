@@ -17,7 +17,7 @@ class Server extends Command
     protected function configure()
     {
         $this->setName('server')
-            ->addArgument('type', Argument::OPTIONAL, "input start or stop to control Server")
+            ->addArgument('type', Argument::OPTIONAL, "input start or stop or monitor or reload to control Server")
             ->setDescription('to control Http and WebSocket Server');
     }
 
@@ -36,6 +36,10 @@ class Server extends Command
             $shell="nohup php ".__DIR__.'/../../../server/monitor/Server.php >/dev/null 2>&1 &';
             shell_exec($shell);
             $output->writeln("The Monitor has started");
+        }else if($type=='reload'){
+            $shell=__DIR__.'/../../../server/reload.sh';
+            shell_exec($shell);
+            $output->writeln("The Server has reLoad");
         }else{
             $output->writeln("Input Error");
         }
